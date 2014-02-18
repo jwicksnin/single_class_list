@@ -7,9 +7,9 @@ describe('Piano object tests', function() {
   var piano;
 
   beforeEach(function() {
-    piano = new Piano('upright', 8);
+    piano = new Piano('grand', 8);
   });
-
+  var types = ['upright', 'grand', 'baby'];
   describe('constructor', function() {
     //write what each piano should be first
     it('piano should be truthy (exists)', function() {
@@ -22,15 +22,22 @@ describe('Piano object tests', function() {
     it('piano should have a get rank function', function() {
       expect(piano.getVolume).to.be.an('function');
     });
-    it('piano.suit should be immutable', function() {
-      expect(piano.getType()).to.equal('upright');
+    it('piano.type should be immutable', function() {
+      expect(piano.getType()).to.equal('grand');
       piano.type = 'grand';
-      expect(piano.getType()).to.equal('upright');
+      expect(piano.getType()).to.equal('grand');
     });
-    it('piano.rank should be immutable', function() {
+    it('piano.volume should be immutable', function() {
       expect(piano.getVolume()).to.equal(8);
       piano.volume = 10;
       expect(piano.getVolume()).to.equal(8);
+    });
+    it('piano volume should be 11 or less', function() {
+      expect(piano.getVolume()).to.be.below(12);
+      expect(piano.getVolume()).to.be.above(0);
+    });
+    it('piano volume should one of four types', function() {
+      expect(types).to.contain(piano.getType());
     });
   });
 });
